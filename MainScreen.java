@@ -14,20 +14,59 @@ public class MainScreen extends JPanel implements ActionListener, MouseMotionLis
     private BufferedImage image;
     private Graphics2D bufferedGraphics;
     private Timer time;
-    private Walls wall1, wall2;
+    public Walls wall1, wall2;
+    public double outsideTemperature;
+    public double wallTemperature;
+    public static final int WALL_AREA = 320;
 
     public MainScreen(){
         super();
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         image = new BufferedImage(WIDTH,HEIGHT, BufferedImage.TYPE_INT_RGB);
         bufferedGraphics = image.createGraphics();
-        time = new Timer(15, this);
+        time = new Timer(10, this);
         wall1 = new Walls(120,90, Walls.Type.COPPER);
         wall2 = new Walls(210,90, Walls.Type.ALUMINUM);
         addMouseMotionListener(this);
         addMouseListener(this);
         addKeyListener(this);
         requestFocus();
+    }
+
+    public double wall1MaterialHeat(){
+        double wall1heat;
+        wall1heat = wall1.materialType.specificHeat * WALL_AREA * 3;
+        return wall1heat;
+    }
+
+    public double wall2MaterialHeat(){
+        double wall2heat;
+        wall2heat = wall2.materialType.specificHeat * WALL_AREA * 3;
+        return wall2heat;
+    }
+
+    public double wall1RateOfHeatTransfer(){
+        double wall1roht;
+        wall1roht = wall1.materialType.thermalConductivity*WALL_AREA*3/wall1.WALL_DEPTH;
+        return wall1roht;
+    }
+
+    public double wall2RateOfHeatTransfer(){
+        double wall2roht;
+        wall2roht = wall1.materialType.thermalConductivity*WALL_AREA*3/wall2.WALL_DEPTH;
+        return wall2roht;
+    }
+
+    public void setOutsideTemperature(double outsideTemperature) {
+        this.outsideTemperature = outsideTemperature;
+    }
+
+    public double getWallTemperature() {
+        return wallTemperature;
+    }
+
+    public double getOutsideTemperature() {
+        return outsideTemperature;
     }
     @Override public void paintComponent(Graphics g){
         super.paintComponent(g);
