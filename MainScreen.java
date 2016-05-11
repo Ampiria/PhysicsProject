@@ -3,33 +3,32 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.border.EmptyBorder;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
  * Created by nigel on 5/5/2016.
  */
-public class MainScreen extends JPanel implements ActionListener, MouseMotionListener, MouseListener, KeyListener {
+
+public class MainScreen extends JPanel {
     public static final int HEIGHT = 600;
     public static final int WIDTH = 900;
     private BufferedImage image;
     private Graphics2D bufferedGraphics;
-    private Timer time;
     public Walls wall1, wall2;
     public double outsideTemperature;
     public double wallTemperature;
     public static final int WALL_AREA = 320;
+    public static double time = 0.0;
 
     public MainScreen(){
         super();
         setPreferredSize(new Dimension(WIDTH - 250,HEIGHT));
         image = new BufferedImage(WIDTH,HEIGHT, BufferedImage.TYPE_INT_RGB);
         bufferedGraphics = image.createGraphics();
-        time = new Timer(10, this);
         wall1 = new Walls(120,90, Walls.Type.COPPER);
         wall2 = new Walls(210,90, Walls.Type.ALUMINUM);
-        addMouseMotionListener(this);
-        addMouseListener(this);
-        addKeyListener(this);
         requestFocus();
     }
 
@@ -81,7 +80,7 @@ public class MainScreen extends JPanel implements ActionListener, MouseMotionLis
 
     public static void main(String[] args){
         JFrame frame = new JFrame("Thermodynamics");
-        JFrame outputframe = new JFrame("Outputs");
+        JFrame outputFrame = new JFrame("Outputs");
 
         MainScreen c = new MainScreen();
         JPanel wallpanel = new JPanel();
@@ -89,64 +88,50 @@ public class MainScreen extends JPanel implements ActionListener, MouseMotionLis
         wallpanel.setPreferredSize(new Dimension (WIDTH - 250, 600));
         wallpanel.setVisible(true);
 
-        JPanel sidepanel = new SidePanel();
-        sidepanel.setPreferredSize(new Dimension(250,600));
-        sidepanel.setVisible(true);
+        JPanel sidePanel = new SidePanel();
+        sidePanel.setPreferredSize(new Dimension(250,600));
+        sidePanel.setVisible(true);
 
-        BoxLayout boxlayout = new BoxLayout(sidepanel, BoxLayout.Y_AXIS);
-        sidepanel.setLayout(boxlayout);
+        BoxLayout boxlayout = new BoxLayout(sidePanel, BoxLayout.Y_AXIS);
+        sidePanel.setLayout(boxlayout);
 
-        sidepanel.setBorder(new EmptyBorder(new Insets(10, 20, 10, 20)));
+        sidePanel.setBorder(new EmptyBorder(new Insets(40, 20, 40, 20)));
 
-        JPanel containerpanel = new JPanel();
-        containerpanel.add(wallpanel);
-        containerpanel.add(sidepanel);
-        containerpanel.setPreferredSize(new Dimension (WIDTH, HEIGHT));
+        JPanel containerPanel = new JPanel();
+        containerPanel.add(wallpanel);
+        containerPanel.add(sidePanel);
+        containerPanel.setPreferredSize(new Dimension (WIDTH, HEIGHT));
 
-        frame.add(containerpanel);
+        frame.add(containerPanel);
 
         frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel outputpanel = new OutputPanel();
-        outputpanel.setPreferredSize(new Dimension(250,300));
-        outputpanel.setVisible(true);
+        JPanel outputPanel = new OutputPanel();
+        outputPanel.setPreferredSize(new Dimension(320,300));
+        outputPanel.setVisible(true);
 
-        BoxLayout boxlayout2 = new BoxLayout(outputpanel, BoxLayout.Y_AXIS);
-        outputpanel.setLayout(boxlayout2);
-        outputpanel.setBorder(new EmptyBorder(new Insets(20, 20, 20, 20)));
+        BoxLayout boxlayout2 = new BoxLayout(outputPanel, BoxLayout.Y_AXIS);
+        outputPanel.setLayout(boxlayout2);
+        outputPanel.setBorder(new EmptyBorder(new Insets(20, 20, 20, 20)));
 
-        outputframe.add(outputpanel);
+        outputFrame.add(outputPanel);
 
-        outputframe.pack();
-        outputframe.setResizable(false);
-        outputframe.setVisible(true);
-        outputframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        outputFrame.pack();
+        outputFrame.setResizable(false);
+        outputFrame.setVisible(true);
+        outputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 
-    @Override public void actionPerformed(ActionEvent e){}
+    public static boolean getRunning() {
+        return SidePanel.getRunning();
+    }
 
-    @Override public void mouseMoved(MouseEvent e){}
-
-    @Override public void mouseDragged(MouseEvent e){}
-
-    @Override public void mouseClicked(MouseEvent e){}
-
-    @Override public void mousePressed(MouseEvent e) {}
-
-    @Override public void mouseReleased(MouseEvent e) {}
-
-    @Override public void mouseEntered(MouseEvent e) {}
-
-    @Override public void mouseExited(MouseEvent e) {}
-
-    @Override public void keyReleased(KeyEvent e){}
-
-    @Override public void keyTyped(KeyEvent e){}
-
-    @Override public void keyPressed(KeyEvent e){}
-
+    public static void setTime(double aTime) {
+        time = aTime;
+        SidePanel.timelabel.setText(Double.toString(time));
+    }
 }

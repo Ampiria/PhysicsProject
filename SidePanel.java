@@ -14,7 +14,7 @@ import javax.swing.border.LineBorder;
 /**
  * Created by nigel on 5/5/2016.
  */
-public class SidePanel extends JPanel implements MouseListener, ActionListener{
+public class SidePanel extends JPanel {
 
     JButton startbut = new JButton("Start");
 
@@ -29,7 +29,7 @@ public class SidePanel extends JPanel implements MouseListener, ActionListener{
 
     JLabel timetitle = new JLabel("Time");
 
-    JLabel timelabel = new JLabel("0.0");
+    static JLabel timelabel = new JLabel("0.0");
 
     JPanel buttonpanel = new ButtonPanel();
     BoxLayout boxlayout3 = new BoxLayout(buttonpanel, BoxLayout.X_AXIS);
@@ -100,21 +100,11 @@ public class SidePanel extends JPanel implements MouseListener, ActionListener{
         timelabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(timelabel);
 
-
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 4));
 
     }
 
-
-    @Override public void actionPerformed(ActionEvent e){}
-
-    @Override public void mousePressed(MouseEvent e) {}
-
-    @Override public void mouseReleased(MouseEvent e) {}
-
-    @Override public void mouseEntered(MouseEvent e) {}
-
-    @Override public void mouseExited(MouseEvent e) {}
-
-    @Override public void mouseClicked(MouseEvent e) { }
+    public static boolean getRunning() {
+        return ButtonPanel.getRunning();
+    }
 }

@@ -13,19 +13,19 @@ import javax.swing.border.LineBorder;
 
 public class OutputPanel extends JPanel {
 
-    JLabel heatratetitle = new JLabel("Rate of Heat Transfer");
+    JLabel heatratetitle = new JLabel("Rate of Heat Transfer (W or J/s)");
 
     JLabel heatratelabel = new JLabel("0.0");
 
-    JLabel totalheattitle = new JLabel("Total Heat Transferred");
+    JLabel totalheattitle = new JLabel("Total Heat Transferred (J)");
 
     JLabel totalheatlabel = new JLabel("0.0");
 
-    JLabel outtemptitle = new JLabel("Outside Temperature");
+    JLabel outtemptitle = new JLabel("Outside Temperature (°C)");
 
     JLabel outtemp = new JLabel("Hello");
 
-    JLabel intemptitle = new JLabel("Inside Temperature");
+    JLabel intemptitle = new JLabel("Inside Temperature(°C)");
 
     JLabel intemp = new JLabel("Herro");
 
@@ -41,7 +41,7 @@ public class OutputPanel extends JPanel {
         outtemp.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(outtemp);
 
-        add(Box.createRigidArea(new Dimension(0,10)));
+        add(Box.createRigidArea(new Dimension(0,20)));
 
         intemptitle.setFont(titlefont);
         intemptitle.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -51,7 +51,7 @@ public class OutputPanel extends JPanel {
         intemp.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(intemp);
 
-        add(Box.createRigidArea(new Dimension(0,10)));
+        add(Box.createRigidArea(new Dimension(0,20)));
 
         heatratetitle.setFont(titlefont);
         heatratetitle.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -61,7 +61,7 @@ public class OutputPanel extends JPanel {
         heatratelabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(heatratelabel);
 
-        add(Box.createRigidArea(new Dimension(0,10)));
+        add(Box.createRigidArea(new Dimension(0,20)));
 
         totalheattitle.setFont(titlefont);
         totalheattitle.setAlignmentX(Component.CENTER_ALIGNMENT);
