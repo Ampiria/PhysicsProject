@@ -1,5 +1,3 @@
-import sun.applet.Main;
-
 import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -96,6 +94,7 @@ public class SidePanel extends JPanel {
                 MainScreen.wallpanel.add(MainScreen.c);
                 MainScreen.wallpanel.setVisible(true);
                 MainScreen.containerPanel.add(MainScreen.wallpanel);
+                MainScreen.containerPanel.add(MainScreen.sidePanel);
                 MainScreen.containerPanel.setVisible(true);
                 MainScreen.frame.add(MainScreen.containerPanel);
                 MainScreen.frame.setVisible(true);
@@ -123,30 +122,10 @@ public class SidePanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 OutputPanel.outtemp.setText(String.valueOf(MainScreen.sidePanel.getOutsideTemp()));
-                OutputPanel.totalheatlabel.setText(String.valueOf(MainScreen.insideTemperature));
             }
         });
-
-        add(Box.createRigidArea(new Dimension(0,20)));
-
-        wallslidertitle.setFont(titlefont);
-        wallslidertitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(wallslidertitle);
 
         add(Box.createRigidArea(new Dimension(0,10)));
-
-        walltempslide.setMajorTickSpacing(20);
-        walltempslide.setPaintTicks(true);
-        walltempslide.setFont(sliderfont);
-        walltempslide.setPaintLabels(true);
-        walltempslide.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(walltempslide);
-        walltempslide.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                OutputPanel.walltemp.setText(String.valueOf(MainScreen.sidePanel.getWallTemp()));
-            }
-        });
 
         sliderundertitle.setFont(sliderfont);
         sliderundertitle.setAlignmentX(Component.CENTER_ALIGNMENT);

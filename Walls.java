@@ -70,9 +70,7 @@ public class Walls {
     public double materialHeat(){
         return materialType.specificHeat * WALL_AREA * 3;
     }
-    public double rateOfHeatTransfer(){
-        return materialType.thermalConductivity*WALL_AREA*3/WALL_DEPTH;
-    }
+
 
     public int getxPosition() {
         return xPosition;

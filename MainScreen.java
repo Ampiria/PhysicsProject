@@ -46,10 +46,7 @@ public class MainScreen extends JPanel {
     }
 
     public void setInsideTemperature(){
-        this.insideTemperature = ((wall1.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)*
-                sidePanel.outsidetempslide.getValue())+(wall2.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)*
-                sidePanel.outsidetempslide.getValue()))/((wall1.materialType.thermalConductivity*(wall1.WALL_WIDTH/10))+
-                (wall2.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)));
+        this.insideTemperature = 9;
     }
     public static void setTotalHeat(){
         double outsideHeat;
@@ -76,6 +73,9 @@ public class MainScreen extends JPanel {
     public static MainScreen c;
     public static  JPanel wallpanel,containerPanel;
     public static BoxLayout boxlayout;
+    public double rateOfHeatTransfer(){
+        return (MainScreen.outsideTemperature-MainScreen.insideTemperature)/((wall1.WALL_WIDTH/wall1.materialType.thermalConductivity)+(wall2.WALL_WIDTH/wall2.materialType.thermalConductivity));
+    }
     public static void main(String[] args){
         frame = new JFrame("Thermodynamics");
         JFrame outputFrame = new JFrame("Outputs");
