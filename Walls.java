@@ -4,7 +4,7 @@ import java.awt.*;
  * Created by nigel on 5/5/2016.
  */
 public class Walls {
-    public static final int WALL_HEIGHT = 400;
+    public static final int WALL_HEIGHT = MainScreen.HEIGHT;
     public static final int WALL_WIDTH = 80;
     public static final int WALL_DEPTH = 4;
     private int xPosition, yPosition;

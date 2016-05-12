@@ -17,6 +17,7 @@ public class SidePanel extends JPanel {
     JButton startbut = new JButton("Start");
 
     JSlider outsidetempslide = new JSlider(0,100,50);
+    JSlider walltempslide = new JSlider(0,100,50);
 
     JLabel menu1title = new JLabel("Wall 1 Material");
 
@@ -24,6 +25,8 @@ public class SidePanel extends JPanel {
 
     JLabel slidertitle = new JLabel("Outside Temperature");
     JLabel sliderundertitle = new JLabel("°C");
+    JLabel wallslidertitle = new JLabel("Wall Temperature");
+    JLabel wallsliderundertitle = new JLabel("°C");
 
     JLabel timetitle = new JLabel("Time");
 
@@ -44,6 +47,10 @@ public class SidePanel extends JPanel {
         return outsidetempslide.getValue();
     }
 
+    public int getWallTemp(){
+        return walltempslide.getValue();
+    }
+
     public SidePanel() {
 
         menu1title.setFont(titlefont);
@@ -58,7 +65,7 @@ public class SidePanel extends JPanel {
         wall1menu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 MainScreen.wall1type = String.valueOf(MainScreen.sidePanel.wall1menu.getSelectedItem());
-                MainScreen.wall1 = new Walls(120,90, MainScreen.wall1type);
+                MainScreen.wall1 = new Walls(179,0, MainScreen.wall1type);
                 MainScreen.c.wall1.drawWalls(MainScreen.bufferedGraphics);
                 MainScreen.wallpanel.add(MainScreen.c);
                 MainScreen.wallpanel.setVisible(true);
@@ -70,7 +77,7 @@ public class SidePanel extends JPanel {
             }
         });
 
-        add(Box.createRigidArea(new Dimension(0,60)));
+        add(Box.createRigidArea(new Dimension(0,40)));
 
         menu2title.setFont(titlefont);
         menu2title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -84,7 +91,7 @@ public class SidePanel extends JPanel {
         wall2menu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 MainScreen.wall2type = String.valueOf(MainScreen.sidePanel.wall2menu.getSelectedItem());
-                MainScreen.wall2 = new Walls(210,90, MainScreen.wall2type);
+                MainScreen.wall2 = new Walls(280,00, MainScreen.wall2type);
                 MainScreen.c.wall2.drawWalls(MainScreen.bufferedGraphics);
                 MainScreen.wallpanel.add(MainScreen.c);
                 MainScreen.wallpanel.setVisible(true);
@@ -96,11 +103,13 @@ public class SidePanel extends JPanel {
             }
         });
 
-        add(Box.createRigidArea(new Dimension(0,60)));
+        add(Box.createRigidArea(new Dimension(0,40)));
 
         slidertitle.setFont(titlefont);
         slidertitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(slidertitle);
+
+
 
         add(Box.createRigidArea(new Dimension(0,10)));
 
@@ -118,16 +127,37 @@ public class SidePanel extends JPanel {
             }
         });
 
+        add(Box.createRigidArea(new Dimension(0,20)));
+
+        wallslidertitle.setFont(titlefont);
+        wallslidertitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(wallslidertitle);
+
+        add(Box.createRigidArea(new Dimension(0,10)));
+
+        walltempslide.setMajorTickSpacing(20);
+        walltempslide.setPaintTicks(true);
+        walltempslide.setFont(sliderfont);
+        walltempslide.setPaintLabels(true);
+        walltempslide.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(walltempslide);
+        walltempslide.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                OutputPanel.walltemp.setText(String.valueOf(MainScreen.sidePanel.getWallTemp()));
+            }
+        });
+
         sliderundertitle.setFont(sliderfont);
         sliderundertitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(sliderundertitle);
 
-        add(Box.createRigidArea(new Dimension(0,50)));
+        add(Box.createRigidArea(new Dimension(0,30)));
 
         buttonpanel.setLayout(boxlayout3);
         add(buttonpanel);
 
-        add(Box.createRigidArea(new Dimension(0,50)));
+        add(Box.createRigidArea(new Dimension(0,30)));
 
         timetitle.setFont(titlefont);
         timetitle.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -64,6 +64,8 @@ public class ButtonPanel extends JPanel {
 
             public void actionPerformed (ActionEvent e) {
                 MainScreen.setTime(0.0);
+                MainScreen.sidePanel.outsidetempslide.setValue(50);
+                MainScreen.sidePanel.walltempslide.setValue(50);
             }
         });
 

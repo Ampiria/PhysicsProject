@@ -30,8 +30,10 @@ public class MainScreen extends JPanel {
         bufferedGraphics = image.createGraphics();
         wall1type = String.valueOf(sidePanel.wall1menu.getSelectedItem());
         wall2type = String.valueOf(sidePanel.wall1menu.getSelectedItem());
-        wall1 = new Walls(120,90, wall1type);
-        wall2 = new Walls(210,90, wall2type);
+        wall1 = new Walls(179,0, wall1type);
+        wall2 = new Walls(260,0, wall2type);
+        bufferedGraphics.setColor(Color.red);
+        bufferedGraphics.drawLine(200,90,200,490);
         requestFocus();
     }
 
@@ -64,8 +66,8 @@ public class MainScreen extends JPanel {
         bufferedGraphics.fillRect(0,0,WIDTH - 250,HEIGHT);
         wall1.drawWalls(bufferedGraphics);
         wall2.drawWalls(bufferedGraphics);
-        g.drawLine(200,90,210,90);
-        g.drawLine(200,490,210,490);
+        g.setColor(Color.red);
+        g.drawLine(200,90,200,490);
         g.drawImage(image,0,0,this);
         Toolkit.getDefaultToolkit().sync();
     }
@@ -73,6 +75,7 @@ public class MainScreen extends JPanel {
     public static JFrame frame;
     public static MainScreen c;
     public static  JPanel wallpanel,containerPanel;
+    public static BoxLayout boxlayout;
     public static void main(String[] args){
         frame = new JFrame("Thermodynamics");
         JFrame outputFrame = new JFrame("Outputs");
@@ -87,7 +90,7 @@ public class MainScreen extends JPanel {
         sidePanel.setPreferredSize(new Dimension(250,600));
         sidePanel.setVisible(true);
 
-        BoxLayout boxlayout = new BoxLayout(sidePanel, BoxLayout.Y_AXIS);
+        boxlayout = new BoxLayout(sidePanel, BoxLayout.Y_AXIS);
         sidePanel.setLayout(boxlayout);
 
         sidePanel.setBorder(new EmptyBorder(new Insets(40, 20, 40, 20)));
@@ -105,7 +108,7 @@ public class MainScreen extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel outputPanel = new OutputPanel();
-        outputPanel.setPreferredSize(new Dimension(320,300));
+        outputPanel.setPreferredSize(new Dimension(320,350));
         outputPanel.setVisible(true);
 
         BoxLayout boxlayout2 = new BoxLayout(outputPanel, BoxLayout.Y_AXIS);
