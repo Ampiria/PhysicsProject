@@ -1,15 +1,13 @@
+import sun.applet.Main;
+
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.Component;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * Created by nigel on 5/5/2016.
@@ -34,13 +32,17 @@ public class SidePanel extends JPanel {
     JPanel buttonpanel = new ButtonPanel();
     BoxLayout boxlayout3 = new BoxLayout(buttonpanel, BoxLayout.X_AXIS);
 
-    String[] choices = { "Aluminum","Copper", "Glass","Ice","Iron/Steel","Lead","Wood"};
-    final JComboBox<String> wall1menu = new JComboBox<String>(choices);
-    final JComboBox<String> wall2menu = new JComboBox<String>(choices);
+    public static String[] choices = { "Aluminum","Copper", "Glass","Ice","Steel","Lead","Wood"};
+    public static final JComboBox<String> wall1menu = new JComboBox<String>(choices);
+    public static final JComboBox<String> wall2menu = new JComboBox<String>(choices);
 
     Font sliderfont = new Font("Serif", Font.BOLD, 15);
     Font titlefont = new Font("Arial", Font.BOLD, 18);
     Font outputfont = new Font("Arial", Font.BOLD, 24);
+
+    public int getOutsideTemp(){
+        return outsidetempslide.getValue();
+    }
 
     public SidePanel() {
 
@@ -53,6 +55,20 @@ public class SidePanel extends JPanel {
         wall1menu.setSize(100,20);
         wall1menu.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(wall1menu);
+        wall1menu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                MainScreen.wall1type = String.valueOf(MainScreen.sidePanel.wall1menu.getSelectedItem());
+                MainScreen.wall1 = new Walls(120,90, MainScreen.wall1type);
+                MainScreen.c.wall1.drawWalls(MainScreen.bufferedGraphics);
+                MainScreen.wallpanel.add(MainScreen.c);
+                MainScreen.wallpanel.setVisible(true);
+                MainScreen.containerPanel.add(MainScreen.wallpanel);
+                MainScreen.containerPanel.setVisible(true);
+                MainScreen.frame.add(MainScreen.containerPanel);
+                MainScreen.frame.setVisible(true);
+
+            }
+        });
 
         add(Box.createRigidArea(new Dimension(0,60)));
 
@@ -65,6 +81,20 @@ public class SidePanel extends JPanel {
         wall2menu.setSize(100,20);
         wall2menu.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(wall2menu);
+        wall2menu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                MainScreen.wall2type = String.valueOf(MainScreen.sidePanel.wall2menu.getSelectedItem());
+                MainScreen.wall2 = new Walls(210,90, MainScreen.wall2type);
+                MainScreen.c.wall2.drawWalls(MainScreen.bufferedGraphics);
+                MainScreen.wallpanel.add(MainScreen.c);
+                MainScreen.wallpanel.setVisible(true);
+                MainScreen.containerPanel.add(MainScreen.wallpanel);
+                MainScreen.containerPanel.setVisible(true);
+                MainScreen.frame.add(MainScreen.containerPanel);
+                MainScreen.frame.setVisible(true);
+
+            }
+        });
 
         add(Box.createRigidArea(new Dimension(0,60)));
 
@@ -80,6 +110,13 @@ public class SidePanel extends JPanel {
         outsidetempslide.setPaintLabels(true);
         outsidetempslide.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(outsidetempslide);
+        outsidetempslide.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                OutputPanel.outtemp.setText(String.valueOf(MainScreen.sidePanel.getOutsideTemp()));
+                OutputPanel.totalheatlabel.setText(String.valueOf(MainScreen.insideTemperature));
+            }
+        });
 
         sliderundertitle.setFont(sliderfont);
         sliderundertitle.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -19,15 +19,15 @@ public class OutputPanel extends JPanel {
 
     JLabel totalheattitle = new JLabel("Total Heat Transferred (J)");
 
-    JLabel totalheatlabel = new JLabel("0.0");
+    public static JLabel totalheatlabel = new JLabel("0.0");
 
     JLabel outtemptitle = new JLabel("Outside Temperature (°C)");
 
-    JLabel outtemp = new JLabel("Hello");
+    public static JLabel outtemp = new JLabel(String.valueOf(MainScreen.sidePanel.outsidetempslide.getValue()));
 
     JLabel intemptitle = new JLabel("Inside Temperature(°C)");
 
-    JLabel intemp = new JLabel("Herro");
+    JLabel intemp = new JLabel(String.valueOf(MainScreen.insideTemperature));
 
     Font titlefont = new Font("Arial", Font.BOLD, 18);
     Font outputfont = new Font("Arial", Font.BOLD, 24);
@@ -40,6 +40,7 @@ public class OutputPanel extends JPanel {
         outtemp.setFont(outputfont);
         outtemp.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(outtemp);
+
 
         add(Box.createRigidArea(new Dimension(0,20)));
 

@@ -1,5 +1,3 @@
-import sun.plugin2.util.ColorUtil;
-
 import java.awt.*;
 
 /**
@@ -16,7 +14,8 @@ public class Walls {
     private static final Color steel = new Color(166, 180, 181);
     private double Temperature;
     public Type materialType;
-
+    public static final int WALL_AREA = 320;
+    //every 10 px is meter
 
     enum Type{
 
@@ -25,7 +24,7 @@ public class Walls {
         GLASS ("Glass", 0.201, Color.cyan, 5000, 0.8),
         ICE ("Ice", 0.5, lightBlue, 917, 1.6),
         IRON_STEEL("Iron/Steel", 0.11, steel, 7850, 50.2),
-        LEAD("Lead", 0.0311, Color.darkGray, 11340, 34.7),
+        LEAD("Lead", 0.0311, Color.black, 11340, 34.7),
         WOOD("Wood", 0.401, brown, 510, 0.26);
 
         private String material;
@@ -40,10 +39,39 @@ public class Walls {
 
     }
 
-    public Walls(int xPosition, int yPosition, Type materialType){
+    public Walls(int xPosition, int yPosition, String MaterialType){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
-        this.materialType = materialType;
+        switch (MaterialType){
+            case "Aluminum":
+                materialType = Type.ALUMINUM;
+                break;
+            case "Copper":
+                materialType = Type.COPPER;
+                break;
+            case "Glass":
+                materialType = Type.GLASS;
+                break;
+            case "Ice":
+                materialType = Type.ICE;
+                break;
+            case "Steel":
+                materialType = Type.IRON_STEEL;
+                break;
+            case "Lead":
+                materialType = Type.LEAD;
+                break;
+            case "Wood":
+                materialType = Type.WOOD;
+                break;
+
+        }
+    }
+    public double materialHeat(){
+        return materialType.specificHeat * WALL_AREA * 3;
+    }
+    public double rateOfHeatTransfer(){
+        return materialType.thermalConductivity*WALL_AREA*3/WALL_DEPTH;
     }
 
     public int getxPosition() {

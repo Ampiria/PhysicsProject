@@ -15,53 +15,43 @@ public class MainScreen extends JPanel {
     public static final int HEIGHT = 600;
     public static final int WIDTH = 900;
     private BufferedImage image;
-    private Graphics2D bufferedGraphics;
-    public Walls wall1, wall2;
-    public double outsideTemperature;
-    public double wallTemperature;
+    public static Graphics2D bufferedGraphics;
+    public static Walls wall1, wall2;
+    public static double outsideTemperature;
+    public static double insideTemperature, totalHeat;
     public static final int WALL_AREA = 320;
     public static double time = 0.0;
+    public static String wall1type, wall2type;
 
     public MainScreen(){
         super();
         setPreferredSize(new Dimension(WIDTH - 250,HEIGHT));
         image = new BufferedImage(WIDTH,HEIGHT, BufferedImage.TYPE_INT_RGB);
         bufferedGraphics = image.createGraphics();
-        wall1 = new Walls(120,90, Walls.Type.COPPER);
-        wall2 = new Walls(210,90, Walls.Type.ALUMINUM);
+        wall1type = String.valueOf(sidePanel.wall1menu.getSelectedItem());
+        wall2type = String.valueOf(sidePanel.wall1menu.getSelectedItem());
+        wall1 = new Walls(120,90, wall1type);
+        wall2 = new Walls(210,90, wall2type);
         requestFocus();
     }
 
-    public double wall1MaterialHeat(){
-        double wall1heat;
-        wall1heat = wall1.materialType.specificHeat * WALL_AREA * 3;
-        return wall1heat;
+    public void setOutsideTemperature() {
+        this.outsideTemperature = sidePanel.getOutsideTemp();
     }
 
-    public double wall2MaterialHeat(){
-        double wall2heat;
-        wall2heat = wall2.materialType.specificHeat * WALL_AREA * 3;
-        return wall2heat;
+    public double getInsideTemperature() {
+        return insideTemperature;
     }
 
-    public double wall1RateOfHeatTransfer(){
-        double wall1roht;
-        wall1roht = wall1.materialType.thermalConductivity*WALL_AREA*3/wall1.WALL_DEPTH;
-        return wall1roht;
+    public void setInsideTemperature(){
+        this.insideTemperature = ((wall1.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)*
+                sidePanel.outsidetempslide.getValue())+(wall2.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)*
+                sidePanel.outsidetempslide.getValue()))/((wall1.materialType.thermalConductivity*(wall1.WALL_WIDTH/10))+
+                (wall2.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)));
     }
+    public static void setTotalHeat(){
+        double outsideHeat;
 
-    public double wall2RateOfHeatTransfer(){
-        double wall2roht;
-        wall2roht = wall1.materialType.thermalConductivity*WALL_AREA*3/wall2.WALL_DEPTH;
-        return wall2roht;
-    }
-
-    public void setOutsideTemperature(double outsideTemperature) {
-        this.outsideTemperature = outsideTemperature;
-    }
-
-    public double getWallTemperature() {
-        return wallTemperature;
     }
 
     public double getOutsideTemperature() {
@@ -74,21 +64,26 @@ public class MainScreen extends JPanel {
         bufferedGraphics.fillRect(0,0,WIDTH - 250,HEIGHT);
         wall1.drawWalls(bufferedGraphics);
         wall2.drawWalls(bufferedGraphics);
+        g.drawLine(200,90,210,90);
+        g.drawLine(200,490,210,490);
         g.drawImage(image,0,0,this);
         Toolkit.getDefaultToolkit().sync();
     }
-
+    public static SidePanel sidePanel;
+    public static JFrame frame;
+    public static MainScreen c;
+    public static  JPanel wallpanel,containerPanel;
     public static void main(String[] args){
-        JFrame frame = new JFrame("Thermodynamics");
+        frame = new JFrame("Thermodynamics");
         JFrame outputFrame = new JFrame("Outputs");
 
-        MainScreen c = new MainScreen();
-        JPanel wallpanel = new JPanel();
+        c = new MainScreen();
+        wallpanel = new JPanel();
         wallpanel.add(c);
         wallpanel.setPreferredSize(new Dimension (WIDTH - 250, 600));
         wallpanel.setVisible(true);
 
-        JPanel sidePanel = new SidePanel();
+        sidePanel = new SidePanel();
         sidePanel.setPreferredSize(new Dimension(250,600));
         sidePanel.setVisible(true);
 
@@ -97,7 +92,7 @@ public class MainScreen extends JPanel {
 
         sidePanel.setBorder(new EmptyBorder(new Insets(40, 20, 40, 20)));
 
-        JPanel containerPanel = new JPanel();
+        containerPanel = new JPanel();
         containerPanel.add(wallpanel);
         containerPanel.add(sidePanel);
         containerPanel.setPreferredSize(new Dimension (WIDTH, HEIGHT));
