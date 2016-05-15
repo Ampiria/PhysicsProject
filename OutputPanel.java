@@ -22,8 +22,10 @@ public class OutputPanel extends JPanel {
     public static JLabel totalheatlabel = new JLabel("0.0");
 
     JLabel outtemptitle = new JLabel("Outside Temperature (°C)");
+    JLabel walltemptitle = new JLabel("Wall Temperature (°C)");
 
     public static JLabel outtemp = new JLabel(String.valueOf(MainScreen.sidePanel.outsidetempslide.getValue()));
+    public static JLabel walltemp = new JLabel(String.valueOf(MainScreen.sidePanel.walltempslide.getValue()));
 
     JLabel intemptitle = new JLabel("Inside Temperature(°C)");
 
@@ -42,6 +44,15 @@ public class OutputPanel extends JPanel {
         add(outtemp);
 
         add(Box.createRigidArea(new Dimension(0,20)));
+
+        walltemptitle.setFont(titlefont);
+        walltemptitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(walltemptitle);
+
+        walltemp.setFont(outputfont);
+        walltemp.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(walltemp);
+
 
         add(Box.createRigidArea(new Dimension(0,20)));
 

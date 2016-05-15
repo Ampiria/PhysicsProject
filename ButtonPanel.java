@@ -48,6 +48,9 @@ public class ButtonPanel extends JPanel {
                     timer.purge();
 
                 }
+                MainScreen.wall1type = String.valueOf(MainScreen.sidePanel.wall1menu.getSelectedItem());
+                MainScreen.wall1 = new Walls(120,90, MainScreen.wall1type);
+                MainScreen.wall1.drawWalls(MainScreen.bufferedGraphics);
 
             }
         });

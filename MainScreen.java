@@ -29,11 +29,9 @@ public class MainScreen extends JPanel {
         image = new BufferedImage(WIDTH,HEIGHT, BufferedImage.TYPE_INT_RGB);
         bufferedGraphics = image.createGraphics();
         wall1type = String.valueOf(sidePanel.wall1menu.getSelectedItem());
-        wall2type = String.valueOf(sidePanel.wall1menu.getSelectedItem());
+        wall2type = String.valueOf(sidePanel.wall2menu.getSelectedItem());
         wall1 = new Walls(179,0, wall1type);
         wall2 = new Walls(260,0, wall2type);
-        bufferedGraphics.setColor(Color.red);
-        bufferedGraphics.drawLine(200,90,200,490);
         requestFocus();
     }
 
@@ -46,7 +44,10 @@ public class MainScreen extends JPanel {
     }
 
     public void setInsideTemperature(){
-        this.insideTemperature = 9;
+        this.insideTemperature = ((wall1.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)*
+                sidePanel.outsidetempslide.getValue())+(wall2.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)*
+                sidePanel.outsidetempslide.getValue()))/((wall1.materialType.thermalConductivity*(wall1.WALL_WIDTH/10))+
+                (wall2.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)));
     }
     public static void setTotalHeat(){
         double outsideHeat;
@@ -56,6 +57,7 @@ public class MainScreen extends JPanel {
     public double getOutsideTemperature() {
         return outsideTemperature;
     }
+
     @Override public void paintComponent(Graphics g){
         super.paintComponent(g);
         bufferedGraphics.clearRect(0,0,WIDTH - 250, HEIGHT);
@@ -63,19 +65,16 @@ public class MainScreen extends JPanel {
         bufferedGraphics.fillRect(0,0,WIDTH - 250,HEIGHT);
         wall1.drawWalls(bufferedGraphics);
         wall2.drawWalls(bufferedGraphics);
-        g.setColor(Color.red);
-        g.drawLine(200,90,200,490);
         g.drawImage(image,0,0,this);
         Toolkit.getDefaultToolkit().sync();
     }
+
     public static SidePanel sidePanel;
     public static JFrame frame;
     public static MainScreen c;
     public static  JPanel wallpanel,containerPanel;
     public static BoxLayout boxlayout;
-    public double rateOfHeatTransfer(){
-        return (MainScreen.outsideTemperature-MainScreen.insideTemperature)/((wall1.WALL_WIDTH/wall1.materialType.thermalConductivity)+(wall2.WALL_WIDTH/wall2.materialType.thermalConductivity));
-    }
+
     public static void main(String[] args){
         frame = new JFrame("Thermodynamics");
         JFrame outputFrame = new JFrame("Outputs");
