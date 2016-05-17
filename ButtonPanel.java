@@ -29,6 +29,7 @@ public class ButtonPanel extends JPanel {
                     startbutton.setText("Stop");
                     timer = new Timer();
                     timer.schedule(new updateTime(), 0, 100);
+                    timer.schedule(new updateStuff(), 0, 100);
 
                 }
 
@@ -54,6 +55,17 @@ public class ButtonPanel extends JPanel {
                 MainScreen.setTime(0.0);
                 MainScreen.sidePanel.outsidetempslide.setValue(50);
                 MainScreen.sidePanel.walltempslide.setValue(50);
+                MainScreen.setTime(0.0);
+                MainScreen.insideTemperature = 0.0;
+                MainScreen.currentHeat = 0.0;
+                OutputPanel.totalheatlabel.setText("0.0");
+                OutputPanel.netheatlabel.setText("0.0");
+                OutputPanel.heatratelabel.setText("0.0");
+
+                isrunning = false;
+                startbutton.setText("Start");
+                timer.cancel();
+                timer.purge();
             }
         });
 

@@ -12,8 +12,6 @@ import javax.swing.event.ChangeListener;
  */
 public class SidePanel extends JPanel {
 
-    JButton startbut = new JButton("Start");
-
     JSlider outsidetempslide = new JSlider(0,100,50);
     JSlider walltempslide = new JSlider(0,100,50);
 

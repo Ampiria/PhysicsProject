@@ -35,6 +35,8 @@ public class Walls {
             this.material = material;
             this.specificHeat = specificHeat;
             this.materialColor = materialColor;
+            this.density = density;
+            this.thermalConductivity = thermalConductivity;
         }
 
     }

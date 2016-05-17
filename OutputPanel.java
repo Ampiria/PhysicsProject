@@ -6,7 +6,7 @@ public class OutputPanel extends JPanel {
 
     JLabel heatratetitle = new JLabel("Rate of Heat Transfer (W or J/s)");
 
-    JLabel heatratelabel = new JLabel(String.valueOf(MainScreen.rateOfHeatTransfer()));
+    public static JLabel heatratelabel = new JLabel(String.valueOf(MainScreen.rateOfHeatTransfer()));
 
     JLabel totalheattitle = new JLabel("Total Heat Transferred (J)");
 
@@ -20,7 +20,11 @@ public class OutputPanel extends JPanel {
 
     JLabel intemptitle = new JLabel("Inside Temperature(°C)");
 
-    JLabel intemp = new JLabel(String.valueOf(MainScreen.getInsideTemperature()));
+    public static JLabel intemp = new JLabel(String.valueOf(MainScreen.getInsideTemperature()));
+
+    JLabel netheattitle = new JLabel("Net Heat Transferred (J)");
+
+    public static JLabel netheatlabel = new JLabel(String.valueOf(MainScreen.netHeatTransfered()));
 
     Font titlefont = new Font("Arial", Font.BOLD, 18);
     Font outputfont = new Font("Arial", Font.BOLD, 24);
@@ -54,9 +58,7 @@ public class OutputPanel extends JPanel {
         intemp.setFont(outputfont);
         intemp.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(intemp);
-        while (ButtonPanel.getRunning()==true){
-            intemp.setText(String.valueOf(MainScreen.getInsideTemperature()));
-        }
+
 
         add(Box.createRigidArea(new Dimension(0,20)));
 
@@ -67,9 +69,7 @@ public class OutputPanel extends JPanel {
         heatratelabel.setFont(outputfont);
         heatratelabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(heatratelabel);
-        while (ButtonPanel.getRunning()==true){
-            heatratelabel.setText(String.valueOf(MainScreen.rateOfHeatTransfer()));
-        }
+
 
         add(Box.createRigidArea(new Dimension(0,20)));
 
@@ -80,8 +80,15 @@ public class OutputPanel extends JPanel {
         totalheatlabel.setFont(outputfont);
         totalheatlabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(totalheatlabel);
-        while (ButtonPanel.getRunning()==true){
-            MainScreen.updateHeat(String.valueOf(MainScreen.totalHeatTransfered()));
-        }
+
+        add(Box.createRigidArea(new Dimension(0,20)));
+
+        netheattitle.setFont(titlefont);
+        netheattitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(netheattitle);
+
+        netheatlabel.setFont(outputfont);
+        netheatlabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(netheatlabel);
     }
 }

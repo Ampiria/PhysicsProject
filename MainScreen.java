@@ -19,6 +19,7 @@ public class MainScreen extends JPanel {
     public static double insideTemperature;
     public static double time = 0.0;
     public static String wall1type, wall2type;
+    public static double currentHeat = 0.0;
 
     public MainScreen(){
         super();
@@ -32,15 +33,6 @@ public class MainScreen extends JPanel {
         requestFocus();
     }
 
-    public static double setInsideTemperature(){
-        while (ButtonPanel.getRunning()==true){
-            insideTemperature = sidePanel.walltempslide.getValue()-(wall1.materialType.thermalConductivity*sidePanel.outsidetempslide.getValue()-wall1.materialType.thermalConductivity
-                    *sidePanel.walltempslide.getValue())/wall2.materialType.thermalConductivity;
-        }
-
-        return insideTemperature;
-    }
-
     public static double getInsideTemperature(){
         return insideTemperature;
     }
@@ -48,7 +40,7 @@ public class MainScreen extends JPanel {
     public static double rateOfHeatTransfer(){
         double rate1, rate2;
         rate1 = (wall1.materialType.thermalConductivity*wall1.WALL_AREA*(sidePanel.outsidetempslide.getValue()-sidePanel.walltempslide.getValue()))/(wall1.WALL_WIDTH/10);
-        rate2 = (wall1.materialType.thermalConductivity*wall1.WALL_AREA*(sidePanel.walltempslide.getValue()-getInsideTemperature()))/(wall1.WALL_WIDTH/10);
+        rate2 = (wall2.materialType.thermalConductivity*wall2.WALL_AREA*(sidePanel.walltempslide.getValue()-getInsideTemperature()))/(wall2.WALL_WIDTH/10);
         if (rate1>rate2){
             return rate2;
         }else if (rate2 == rate1){
@@ -59,7 +51,17 @@ public class MainScreen extends JPanel {
     }
 
     public static double totalHeatTransfered(){
-        return rateOfHeatTransfer()*Double.valueOf(sidePanel.timelabel.getText());
+        if (rateOfHeatTransfer()*Double.valueOf(sidePanel.timelabel.getText()) < 0) {
+            return -(rateOfHeatTransfer()*Double.valueOf(sidePanel.timelabel.getText()));
+        } else {
+            return rateOfHeatTransfer()*Double.valueOf(sidePanel.timelabel.getText());
+        }
+    }
+
+    public static double netHeatTransfered() {
+        double heatChange = 0.1 * rateOfHeatTransfer();
+        currentHeat += heatChange;
+        return currentHeat;
     }
 
     public static void updateHeat(String s){
@@ -115,7 +117,7 @@ public class MainScreen extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel outputPanel = new OutputPanel();
-        outputPanel.setPreferredSize(new Dimension(320,350));
+        outputPanel.setPreferredSize(new Dimension(320,440));
         outputPanel.setVisible(true);
 
         BoxLayout boxlayout2 = new BoxLayout(outputPanel, BoxLayout.Y_AXIS);
