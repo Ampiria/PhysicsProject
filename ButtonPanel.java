@@ -1,16 +1,8 @@
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
-import java.awt.Component;
 import java.util.Timer;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 
 public class ButtonPanel extends JPanel {
@@ -48,10 +40,6 @@ public class ButtonPanel extends JPanel {
                     timer.purge();
 
                 }
-                MainScreen.wall1type = String.valueOf(MainScreen.sidePanel.wall1menu.getSelectedItem());
-                MainScreen.wall1 = new Walls(120,90, MainScreen.wall1type);
-                MainScreen.wall1.drawWalls(MainScreen.bufferedGraphics);
-
             }
         });
 

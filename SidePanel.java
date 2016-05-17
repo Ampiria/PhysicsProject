@@ -1,5 +1,3 @@
-import sun.applet.Main;
-
 import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

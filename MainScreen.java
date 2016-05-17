@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.border.EmptyBorder;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 
 /**
@@ -18,8 +16,7 @@ public class MainScreen extends JPanel {
     public static Graphics2D bufferedGraphics;
     public static Walls wall1, wall2;
     public static double outsideTemperature;
-    public static double insideTemperature, totalHeat;
-    public static final int WALL_AREA = 320;
+    public static double insideTemperature;
     public static double time = 0.0;
     public static String wall1type, wall2type;
 
@@ -35,27 +32,38 @@ public class MainScreen extends JPanel {
         requestFocus();
     }
 
-    public void setOutsideTemperature() {
-        this.outsideTemperature = sidePanel.getOutsideTemp();
-    }
+    public static double setInsideTemperature(){
+        while (ButtonPanel.getRunning()==true){
+            insideTemperature = sidePanel.walltempslide.getValue()-(wall1.materialType.thermalConductivity*sidePanel.outsidetempslide.getValue()-wall1.materialType.thermalConductivity
+                    *sidePanel.walltempslide.getValue())/wall2.materialType.thermalConductivity;
+        }
 
-    public double getInsideTemperature() {
         return insideTemperature;
     }
 
-    public void setInsideTemperature(){
-        this.insideTemperature = ((wall1.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)*
-                sidePanel.outsidetempslide.getValue())+(wall2.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)*
-                sidePanel.outsidetempslide.getValue()))/((wall1.materialType.thermalConductivity*(wall1.WALL_WIDTH/10))+
-                (wall2.materialType.thermalConductivity*(wall1.WALL_WIDTH/10)));
-    }
-    public static void setTotalHeat(){
-        double outsideHeat;
-
+    public static double getInsideTemperature(){
+        return insideTemperature;
     }
 
-    public double getOutsideTemperature() {
-        return outsideTemperature;
+    public static double rateOfHeatTransfer(){
+        double rate1, rate2;
+        rate1 = (wall1.materialType.thermalConductivity*wall1.WALL_AREA*(sidePanel.outsidetempslide.getValue()-sidePanel.walltempslide.getValue()))/(wall1.WALL_WIDTH/10);
+        rate2 = (wall1.materialType.thermalConductivity*wall1.WALL_AREA*(sidePanel.walltempslide.getValue()-getInsideTemperature()))/(wall1.WALL_WIDTH/10);
+        if (rate1>rate2){
+            return rate2;
+        }else if (rate2 == rate1){
+            return rate1;
+        }else {
+            return rate1;
+        }
+    }
+
+    public static double totalHeatTransfered(){
+        return rateOfHeatTransfer()*Double.valueOf(sidePanel.timelabel.getText());
+    }
+
+    public static void updateHeat(String s){
+        OutputPanel.totalheatlabel.setText(s);
     }
 
     @Override public void paintComponent(Graphics g){
@@ -121,10 +129,6 @@ public class MainScreen extends JPanel {
         outputFrame.setVisible(true);
         outputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    }
-
-    public static boolean getRunning() {
-        return SidePanel.getRunning();
     }
 
     public static void setTime(double aTime) {
