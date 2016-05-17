@@ -30,6 +30,9 @@ public class SidePanel extends JPanel {
     JPanel buttonpanel = new ButtonPanel();
     BoxLayout boxlayout3 = new BoxLayout(buttonpanel, BoxLayout.X_AXIS);
 
+    JPanel buttonpanel2 = new OtherButtonPanel();
+    BoxLayout boxlayout4 = new BoxLayout(buttonpanel2, BoxLayout.X_AXIS);
+
     public static String[] choices = { "Aluminum","Copper", "Glass","Ice","Steel","Lead","Wood"};
     public static final JComboBox<String> wall1menu = new JComboBox<String>(choices);
     public static final JComboBox<String> wall2menu = new JComboBox<String>(choices);
@@ -73,7 +76,7 @@ public class SidePanel extends JPanel {
             }
         });
 
-        add(Box.createRigidArea(new Dimension(0,40)));
+        add(Box.createRigidArea(new Dimension(0,30)));
 
         menu2title.setFont(titlefont);
         menu2title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -101,7 +104,7 @@ public class SidePanel extends JPanel {
             }
         });
 
-        add(Box.createRigidArea(new Dimension(0,40)));
+        add(Box.createRigidArea(new Dimension(0,30)));
 
         slidertitle.setFont(titlefont);
         slidertitle.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -149,12 +152,7 @@ public class SidePanel extends JPanel {
         sliderundertitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(sliderundertitle);
 
-        add(Box.createRigidArea(new Dimension(0,30)));
-
-        buttonpanel.setLayout(boxlayout3);
-        add(buttonpanel);
-
-        add(Box.createRigidArea(new Dimension(0,30)));
+        add(Box.createRigidArea(new Dimension(0,25)));
 
         timetitle.setFont(titlefont);
         timetitle.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -163,6 +161,16 @@ public class SidePanel extends JPanel {
         timelabel.setFont(outputfont);
         timelabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(timelabel);
+
+        add(Box.createRigidArea(new Dimension(0,25)));
+
+        buttonpanel.setLayout(boxlayout3);
+        add(buttonpanel);
+
+        add(Box.createRigidArea(new Dimension(0,20)));
+
+        buttonpanel2.setLayout(boxlayout4);
+        add(buttonpanel2);
 
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 4));
 

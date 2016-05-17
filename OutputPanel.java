@@ -40,7 +40,7 @@ public class OutputPanel extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0,30)));
 
-        intemptitle.setFont(outputfont);
+        intemptitle.setFont(titlefont);
         intemptitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(intemptitle);
 

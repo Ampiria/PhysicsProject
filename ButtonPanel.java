@@ -30,7 +30,7 @@ public class ButtonPanel extends JPanel {
                     timer = new Timer();
                     timer.schedule(new updateTime(), 0, 100);
                     timer.schedule(new updateStuff(), 0, 100);
-                    timer.schedule(new heatArrows(), 0,100);
+                    System.out.print(MainScreen.getWallTemperature());
                 }
 
                 else {

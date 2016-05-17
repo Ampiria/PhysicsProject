@@ -22,8 +22,6 @@ public class MainScreen extends JPanel {
     public static double currentHeat = 0;
     public static double currentHeat2 = 0;
 
-
-
     public MainScreen(){
         super();
         setPreferredSize(new Dimension(WIDTH - 250,HEIGHT));
@@ -31,8 +29,8 @@ public class MainScreen extends JPanel {
         bufferedGraphics = image.createGraphics();
         wall1type = String.valueOf(sidePanel.wall1menu.getSelectedItem());
         wall2type = String.valueOf(sidePanel.wall2menu.getSelectedItem());
-        wall1 = new Walls(WIDTH/2-161,0, wall1type);
-        wall2 = new Walls(WIDTH/2-80,0, wall2type);
+        wall1 = new Walls(179,0, wall1type);
+        wall2 = new Walls(260,0, wall2type);
         requestFocus();
     }
 
@@ -90,16 +88,6 @@ public class MainScreen extends JPanel {
         bufferedGraphics.fillRect(0,0,WIDTH - 250,HEIGHT);
         wall1.drawWalls(bufferedGraphics);
         wall2.drawWalls(bufferedGraphics);
-        bufferedGraphics.setColor(Color.blue);
-        bufferedGraphics.fillRect(0,0,289,HEIGHT);
-        bufferedGraphics.setColor(Color.yellow);
-        bufferedGraphics.fillOval(0,0,100,100);
-        bufferedGraphics.setColor(Color.green);
-        bufferedGraphics.fillRect(0,HEIGHT-80,289,80);
-        bufferedGraphics.setColor( new Color(177, 126, 76));
-        bufferedGraphics.fillRect(450,0,400,HEIGHT);
-        bufferedGraphics.setColor(Color.black);
-        bufferedGraphics.fillRect(450,HEIGHT-80,400,80);
         g.drawImage(image,0,0,this);
         Toolkit.getDefaultToolkit().sync();
     }
@@ -112,7 +100,7 @@ public class MainScreen extends JPanel {
 
     public static void main(String[] args){
         frame = new JFrame("Thermodynamics");
-        JFrame outputFrame = new JFrame("Outputs");
+        //JFrame outputFrame = new JFrame("Outputs");
 
         c = new MainScreen();
         wallpanel = new JPanel();
@@ -141,7 +129,7 @@ public class MainScreen extends JPanel {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel outputPanel = new OutputPanel();
+        /*JPanel outputPanel = new OutputPanel();
         outputPanel.setPreferredSize(new Dimension(320,400));
         outputPanel.setVisible(true);
 
@@ -154,7 +142,7 @@ public class MainScreen extends JPanel {
         outputFrame.pack();
         outputFrame.setResizable(false);
         outputFrame.setVisible(true);
-        outputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        outputFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); */
 
     }
 

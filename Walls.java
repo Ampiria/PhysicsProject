@@ -4,9 +4,9 @@ import java.awt.*;
  * Created by nigel on 5/5/2016.
  */
 public class Walls {
-    public static final int WALL_HEIGHT = MainScreen.HEIGHT;
-    public static final int WALL_WIDTH = 80;
-    public static final int WALL_DEPTH = 4;
+    public static int WALL_HEIGHT = MainScreen.HEIGHT;
+    public static int WALL_WIDTH = 80;
+    public static int WALL_DEPTH = 4;
     private int xPosition, yPosition;
     private static final Color brown = new Color(108, 42, 1);
     private static final Color darkOrange = new Color(177, 82, 31);
