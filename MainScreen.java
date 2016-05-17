@@ -15,7 +15,7 @@ public class MainScreen extends JPanel {
     private BufferedImage image;
     public static Graphics2D bufferedGraphics;
     public static Walls wall1, wall2;
-    public static double outsideTemperature;
+    public static double wallTemperature;
     public static double insideTemperature;
     public static double time = 0.0;
     public static String wall1type, wall2type;
@@ -33,14 +33,15 @@ public class MainScreen extends JPanel {
         requestFocus();
     }
 
-    public static double getInsideTemperature(){
-        return insideTemperature;
+    public static double getWallTemperature(){
+        wallTemperature = (wall1.materialType.thermalConductivity*sidePanel.outsidetempslide.getValue()+sidePanel.insidetempslide.getValue())/(wall1.materialType.thermalConductivity+wall2.materialType.thermalConductivity);
+        return wallTemperature;
     }
 
     public static double rateOfHeatTransfer(){
         double rate1, rate2;
-        rate1 = (wall1.materialType.thermalConductivity*wall1.WALL_AREA*(sidePanel.outsidetempslide.getValue()-sidePanel.walltempslide.getValue()))/(wall1.WALL_WIDTH/10);
-        rate2 = (wall2.materialType.thermalConductivity*wall2.WALL_AREA*(sidePanel.walltempslide.getValue()-getInsideTemperature()))/(wall2.WALL_WIDTH/10);
+        rate1 = (wall1.materialType.thermalConductivity*wall1.WALL_AREA*(sidePanel.outsidetempslide.getValue()-getWallTemperature()))/(wall1.WALL_AREA/10);
+        rate2 = (wall2.materialType.thermalConductivity*wall2.WALL_AREA*(getWallTemperature()-sidePanel.insidetempslide.getValue()))/(wall2.WALL_AREA/10);
         if (rate1>rate2){
             return rate2;
         }else if (rate2 == rate1){
@@ -117,7 +118,7 @@ public class MainScreen extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel outputPanel = new OutputPanel();
-        outputPanel.setPreferredSize(new Dimension(320,440));
+        outputPanel.setPreferredSize(new Dimension(320,400));
         outputPanel.setVisible(true);
 
         BoxLayout boxlayout2 = new BoxLayout(outputPanel, BoxLayout.Y_AXIS);

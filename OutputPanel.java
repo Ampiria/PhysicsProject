@@ -13,14 +13,14 @@ public class OutputPanel extends JPanel {
     public static JLabel totalheatlabel = new JLabel(String.valueOf(MainScreen.totalHeatTransfered()));
 
     JLabel outtemptitle = new JLabel("Outside Temperature (°C)");
-    JLabel walltemptitle = new JLabel("Wall Temperature (°C)");
+    JLabel walltemptitle = new JLabel("Inside Temperature (°C)");
 
     public static JLabel outtemp = new JLabel(String.valueOf(MainScreen.sidePanel.outsidetempslide.getValue()));
-    public static JLabel walltemp = new JLabel(String.valueOf(MainScreen.sidePanel.walltempslide.getValue()));
+    public static JLabel walltemp = new JLabel(String.valueOf(MainScreen.sidePanel.insidetempslide.getValue()));
 
     JLabel intemptitle = new JLabel("Inside Temperature(°C)");
 
-    public static JLabel intemp = new JLabel(String.valueOf(MainScreen.getInsideTemperature()));
+    public static JLabel intemp = new JLabel(String.valueOf(MainScreen.sidePanel.insidetempslide.getValue()));
 
     JLabel netheattitle = new JLabel("Net Heat Transferred (J)");
 
@@ -38,20 +38,9 @@ public class OutputPanel extends JPanel {
         outtemp.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(outtemp);
 
-        add(Box.createRigidArea(new Dimension(0,20)));
+        add(Box.createRigidArea(new Dimension(0,30)));
 
-        walltemptitle.setFont(titlefont);
-        walltemptitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(walltemptitle);
-
-        walltemp.setFont(outputfont);
-        walltemp.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(walltemp);
-
-
-        add(Box.createRigidArea(new Dimension(0,20)));
-
-        intemptitle.setFont(titlefont);
+        intemptitle.setFont(outputfont);
         intemptitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(intemptitle);
 
@@ -59,8 +48,7 @@ public class OutputPanel extends JPanel {
         intemp.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(intemp);
 
-
-        add(Box.createRigidArea(new Dimension(0,20)));
+        add(Box.createRigidArea(new Dimension(0,30)));
 
         heatratetitle.setFont(titlefont);
         heatratetitle.setAlignmentX(Component.CENTER_ALIGNMENT);

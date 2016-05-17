@@ -13,7 +13,7 @@ import javax.swing.event.ChangeListener;
 public class SidePanel extends JPanel {
 
     JSlider outsidetempslide = new JSlider(0,100,50);
-    JSlider walltempslide = new JSlider(0,100,50);
+    JSlider insidetempslide = new JSlider(0,100,50);
 
     JLabel menu1title = new JLabel("Wall 1 Material");
 
@@ -21,8 +21,7 @@ public class SidePanel extends JPanel {
 
     JLabel slidertitle = new JLabel("Outside Temperature");
     JLabel sliderundertitle = new JLabel("°C");
-    JLabel wallslidertitle = new JLabel("Wall Temperature");
-    JLabel wallsliderundertitle = new JLabel("°C");
+    JLabel insideslidertitle = new JLabel("Inside Temperature");
 
     JLabel timetitle = new JLabel("Time");
 
@@ -44,7 +43,7 @@ public class SidePanel extends JPanel {
     }
 
     public int getWallTemp(){
-        return walltempslide.getValue();
+        return insidetempslide.getValue();
     }
 
     public SidePanel() {
@@ -128,19 +127,19 @@ public class SidePanel extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0,20)));
 
-        wallslidertitle.setFont(titlefont);
-        wallslidertitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(wallslidertitle);
+        insideslidertitle.setFont(titlefont);
+        insideslidertitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(insideslidertitle);
 
         add(Box.createRigidArea(new Dimension(0,10)));
 
-        walltempslide.setMajorTickSpacing(20);
-        walltempslide.setPaintTicks(true);
-        walltempslide.setFont(sliderfont);
-        walltempslide.setPaintLabels(true);
-        walltempslide.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(walltempslide);
-        walltempslide.addChangeListener(new ChangeListener() {
+        insidetempslide.setMajorTickSpacing(20);
+        insidetempslide.setPaintTicks(true);
+        insidetempslide.setFont(sliderfont);
+        insidetempslide.setPaintLabels(true);
+        insidetempslide.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(insidetempslide);
+        insidetempslide.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 OutputPanel.walltemp.setText(String.valueOf(MainScreen.sidePanel.getWallTemp()));

@@ -54,7 +54,7 @@ public class ButtonPanel extends JPanel {
             public void actionPerformed (ActionEvent e) {
                 MainScreen.setTime(0.0);
                 MainScreen.sidePanel.outsidetempslide.setValue(50);
-                MainScreen.sidePanel.walltempslide.setValue(50);
+                MainScreen.sidePanel.insidetempslide.setValue(50);
                 MainScreen.setTime(0.0);
                 MainScreen.insideTemperature = 0.0;
                 MainScreen.currentHeat = 0.0;
