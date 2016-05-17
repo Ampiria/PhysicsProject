@@ -1,7 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Dimension;
 import java.util.Timer;
 
 
@@ -30,7 +30,7 @@ public class ButtonPanel extends JPanel {
                     timer = new Timer();
                     timer.schedule(new updateTime(), 0, 100);
                     timer.schedule(new updateStuff(), 0, 100);
-
+                    System.out.print(MainScreen.getWallTemperature());
                 }
 
                 else {
@@ -56,11 +56,11 @@ public class ButtonPanel extends JPanel {
                 MainScreen.sidePanel.outsidetempslide.setValue(50);
                 MainScreen.sidePanel.insidetempslide.setValue(50);
                 MainScreen.setTime(0.0);
-                MainScreen.insideTemperature = 0.0;
-                MainScreen.currentHeat = 0.0;
-                OutputPanel.totalheatlabel.setText("0.0");
-                OutputPanel.netheatlabel.setText("0.0");
-                OutputPanel.heatratelabel.setText("0.0");
+                MainScreen.insideTemperature = 0;
+                MainScreen.currentHeat = 0;
+                OutputPanel.totalheatlabel.setText("0");
+                OutputPanel.netheatlabel.setText("0");
+                OutputPanel.heatratelabel.setText("0");
 
                 isrunning = false;
                 startbutton.setText("Start");

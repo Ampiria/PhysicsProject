@@ -1,14 +1,16 @@
 import java.util.TimerTask;
 
+import static oracle.jrockit.jfr.events.Bits.intValue;
+
 public class updateStuff extends TimerTask {
     public void run() {
-        MainScreen.insideTemperature = MainScreen.sidePanel.insidetempslide.getValue()-(MainScreen.wall1.materialType.thermalConductivity*MainScreen.sidePanel.outsidetempslide.getValue()-MainScreen.wall1.materialType.thermalConductivity*MainScreen.sidePanel.insidetempslide.getValue())/MainScreen.wall2.materialType.thermalConductivity;
-        OutputPanel.intemp.setText(Double.toString(MainScreen.insideTemperature));
+        MainScreen.insideTemperature = MainScreen.sidePanel.insidetempslide.getValue();
+        OutputPanel.intemp.setText(Integer.toString(intValue(MainScreen.sidePanel.insidetempslide.getValue())));
 
-        OutputPanel.heatratelabel.setText(Double.toString(MainScreen.rateOfHeatTransfer()));
+        OutputPanel.heatratelabel.setText(Integer.toString(intValue(MainScreen.rateOfHeatTransfer())));
 
-        OutputPanel.totalheatlabel.setText(Double.toString(MainScreen.totalHeatTransfered()));
+        OutputPanel.totalheatlabel.setText(Integer.toString(intValue(MainScreen.totalHeatTransfered())));
 
-        OutputPanel.netheatlabel.setText(Double.toString(MainScreen.netHeatTransfered()));
+        OutputPanel.netheatlabel.setText(Integer.toString(intValue(MainScreen.netHeatTransfered())));
     }
 }

@@ -17,9 +17,10 @@ public class MainScreen extends JPanel {
     public static Walls wall1, wall2;
     public static double wallTemperature;
     public static double insideTemperature;
-    public static double time = 0.0;
+    public static double time = 0;
     public static String wall1type, wall2type;
-    public static double currentHeat = 0.0;
+    public static double currentHeat = 0;
+    public static double currentHeat2 = 0;
 
     public MainScreen(){
         super();
@@ -34,28 +35,39 @@ public class MainScreen extends JPanel {
     }
 
     public static double getWallTemperature(){
-        wallTemperature = (wall1.materialType.thermalConductivity*sidePanel.outsidetempslide.getValue()+sidePanel.insidetempslide.getValue())/(wall1.materialType.thermalConductivity+wall2.materialType.thermalConductivity);
+        wallTemperature = (wall1.materialType.thermalConductivity*sidePanel.outsidetempslide.getValue()+wall2.materialType.thermalConductivity*sidePanel.insidetempslide.getValue())
+                /(wall1.materialType.thermalConductivity+wall2.materialType.thermalConductivity);
         return wallTemperature;
     }
 
     public static double rateOfHeatTransfer(){
         double rate1, rate2;
-        rate1 = (wall1.materialType.thermalConductivity*wall1.WALL_AREA*(sidePanel.outsidetempslide.getValue()-getWallTemperature()))/(wall1.WALL_AREA/10);
-        rate2 = (wall2.materialType.thermalConductivity*wall2.WALL_AREA*(getWallTemperature()-sidePanel.insidetempslide.getValue()))/(wall2.WALL_AREA/10);
-        if (rate1>rate2){
-            return rate2;
-        }else if (rate2 == rate1){
-            return rate1;
+        rate1 = (wall1.materialType.thermalConductivity*wall1.WALL_AREA*(sidePanel.outsidetempslide.getValue()-getWallTemperature()))/(wall1.WALL_WIDTH/10);
+        rate2 = (wall2.materialType.thermalConductivity*wall2.WALL_AREA*(getWallTemperature()-sidePanel.insidetempslide.getValue()))/(wall2.WALL_WIDTH/10);
+        if (Double.valueOf(sidePanel.timelabel.getText())==0){
+            return 0;
         }else {
-            return rate1;
+            if (rate1 > rate2) {
+                return rate2;
+            } else if (rate2 == rate1) {
+                return rate1;
+            } else {
+                return rate1;
+            }
         }
     }
 
-    public static double totalHeatTransfered(){
-        if (rateOfHeatTransfer()*Double.valueOf(sidePanel.timelabel.getText()) < 0) {
-            return -(rateOfHeatTransfer()*Double.valueOf(sidePanel.timelabel.getText()));
-        } else {
-            return rateOfHeatTransfer()*Double.valueOf(sidePanel.timelabel.getText());
+    public static double totalHeatTransfered() {
+        if (rateOfHeatTransfer() < 0) {
+            double heatChange2 = 0.1 * -(rateOfHeatTransfer());
+            currentHeat2 += heatChange2;
+            return currentHeat2;
+        }else if (rateOfHeatTransfer()>0){
+            double heatChange2 = 0.1*rateOfHeatTransfer();
+            currentHeat2 += heatChange2;
+            return currentHeat2;
+        }else {
+            return currentHeat2;
         }
     }
 

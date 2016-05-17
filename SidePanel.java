@@ -121,7 +121,6 @@ public class SidePanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 OutputPanel.outtemp.setText(String.valueOf(MainScreen.sidePanel.getOutsideTemp()));
-                OutputPanel.totalheatlabel.setText(String.valueOf(MainScreen.insideTemperature));
             }
         });
 
@@ -142,7 +141,7 @@ public class SidePanel extends JPanel {
         insidetempslide.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                OutputPanel.walltemp.setText(String.valueOf(MainScreen.sidePanel.getWallTemp()));
+                OutputPanel.intemp.setText(String.valueOf(MainScreen.sidePanel.insidetempslide.getValue()));
             }
         });
 
