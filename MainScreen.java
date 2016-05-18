@@ -29,8 +29,8 @@ public class MainScreen extends JPanel {
         bufferedGraphics = image.createGraphics();
         wall1type = String.valueOf(sidePanel.wall1menu.getSelectedItem());
         wall2type = String.valueOf(sidePanel.wall2menu.getSelectedItem());
-        wall1 = new Walls(179,0, wall1type);
-        wall2 = new Walls(260,0, wall2type);
+        wall1 = new Walls(279,0, wall1type);
+        wall2 = new Walls(360,0, wall2type);
         requestFocus();
     }
 
@@ -88,6 +88,16 @@ public class MainScreen extends JPanel {
         bufferedGraphics.fillRect(0,0,WIDTH - 250,HEIGHT);
         wall1.drawWalls(bufferedGraphics);
         wall2.drawWalls(bufferedGraphics);
+        bufferedGraphics.setColor(Color.blue);
+        bufferedGraphics.fillRect(0,0,279,HEIGHT);
+        bufferedGraphics.setColor(Color.yellow);
+        bufferedGraphics.fillOval(0,0,100,100);
+        bufferedGraphics.setColor(Color.GREEN);
+        bufferedGraphics.fillRect(0,HEIGHT-80,279,80);
+        bufferedGraphics.setColor(new Color(177, 126, 76));
+        bufferedGraphics.fillRect(440,0,WIDTH,HEIGHT);
+        bufferedGraphics.setColor(Color.black);
+        bufferedGraphics.fillRect(440,HEIGHT-80,WIDTH,80);
         g.drawImage(image,0,0,this);
         Toolkit.getDefaultToolkit().sync();
     }
@@ -100,7 +110,6 @@ public class MainScreen extends JPanel {
 
     public static void main(String[] args){
         frame = new JFrame("Thermodynamics");
-        //JFrame outputFrame = new JFrame("Outputs");
 
         c = new MainScreen();
         wallpanel = new JPanel();
@@ -128,21 +137,6 @@ public class MainScreen extends JPanel {
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        /*JPanel outputPanel = new OutputPanel();
-        outputPanel.setPreferredSize(new Dimension(320,400));
-        outputPanel.setVisible(true);
-
-        BoxLayout boxlayout2 = new BoxLayout(outputPanel, BoxLayout.Y_AXIS);
-        outputPanel.setLayout(boxlayout2);
-        outputPanel.setBorder(new EmptyBorder(new Insets(20, 20, 20, 20)));
-
-        outputFrame.add(outputPanel);
-
-        outputFrame.pack();
-        outputFrame.setResizable(false);
-        outputFrame.setVisible(true);
-        outputFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); */
 
     }
 
